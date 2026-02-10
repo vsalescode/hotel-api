@@ -1,8 +1,22 @@
-# Hotel API
+# 🏨 Hotel API
 
-API REST para gerenciamento de hotéis, hóspedes, reservas, quartos e pagamentos. Desenvolvida em **Spring Boot**, com **PostgreSQL** como banco de dados, e documentação automática via **Swagger/OpenAPI**.
+API REST para gerenciamento de **hotéis, quartos, hóspedes e reservas**.  
+Desenvolvida em **Spring Boot**, com **PostgreSQL** como banco de dados e documentação automática via **Swagger/OpenAPI**.
 
-> ⚠️ **Atenção:** O projeto ainda está em desenvolvimento. Atualmente, apenas o **HotelController** e o serviço de hotéis estão implementados. Os demais módulos (Hospede, Funcionario, Reserva, Quarto e Pagamento) possuem entidades definidas, mas **não possuem controllers nem endpoints prontos**.
+---
+
+## 📌 Visão Geral
+
+O sistema tem como objetivo gerenciar uma rede de hotéis, permitindo:
+
+- Cadastro, atualização e remoção de **hotéis**
+- Gerenciamento de **quartos** e controle de status
+- Criação e cancelamento de **reservas**
+- Cadastro e consulta de **hóspedes**
+- Consultas de hotéis por **cidade** e **categoria**
+
+A API segue os princípios REST, utilizando boas práticas de arquitetura, validação de dados e tratamento de erros.
+
 
 ---
 
@@ -17,20 +31,6 @@ API REST para gerenciamento de hotéis, hóspedes, reservas, quartos e pagamento
 7. [Exemplos de Requisição](#exemplos-de-requisição)  
 8. [Tratamento de Erros](#tratamento-de-erros)  
 9. [Status do Projeto](#status-do-projeto)
-
----
-
-## Descrição do Projeto
-
-O sistema tem como objetivo gerenciar uma rede de hotéis, permitindo:  
-
-- Cadastro, atualização e remoção de **hotéis**.  
-- Cadastro de **hóspedes** e **funcionários** (entidades prontas, mas sem endpoints).  
-- Gerenciamento de **quartos** e **reservas** (entidades prontas, mas sem endpoints).  
-- Controle de **pagamentos** associados às reservas (entidade pronta, mas sem endpoints).  
-- Consulta de hotéis por **cidade** ou **categoria**.  
-
-Atualmente, apenas o módulo de **hotéis** está funcional.
 
 ---
 
@@ -101,9 +101,35 @@ As seguintes entidades estão definidas no projeto:
 | PUT | `/hoteis/{id}` | Atualizar hotel | 200 / 404 |
 | DELETE | `/hoteis/{id}` | Remover hotel | 204 / 404 |
 
-> ⚠️ **Demais módulos (Hospede, Funcionario, Reserva, Quarto, Pagamento) não possuem endpoints implementados.**
+
+### Quartos (/api/quartos)
+
+| Método | Endpoint                       | Descrição                  |
+| ------ | ------------------------------ | -------------------------- |
+| GET    | `/api/quartos/hotel/{hotelId}` | Listar quartos de um hotel |
+| POST   | `/api/quartos/hotel/{hotelId}` | Adicionar quarto ao hotel  |
+| PATCH  | `/api/quartos/{id}/status`     | Alterar status do quarto   |
+
+
+### Reservas (/reservas)
+
+| Método | Endpoint                  | Descrição          |
+| ------ | ------------------------- | ------------------ |
+| POST   | `/reservas`               | Criar nova reserva |
+| PATCH  | `/reservas/{id}/cancelar` | Cancelar reserva   |
+
+
+
+### Hospedes (/api/hospedes)
+
+| Método | Endpoint              | Descrição                |
+| ------ | --------------------- | ------------------------ |
+| GET    | `/api/hospedes`       | Listar todos os hóspedes |
+| POST   | `/api/hospedes`       | Cadastrar hóspede        |
+| GET    | `/api/hospedes/{cpf}` | Buscar hóspede por CPF   |
 
 ---
+
 
 ## Como Rodar a Aplicação
 
@@ -197,10 +223,10 @@ Formato padrão para erros:
 ## Status do Projeto
 
 - **Hotéis:** funcional ✅  
-- **Hospedes:** entidades criadas, controller não implementado ⚠️  
+- **Hospedes:** cadastro e consulta ✅ 
+- **Quartos:** funcional (cadastro e status) ✅  
+- **Reservas:** criação e cancelamento ✅
 - **Funcionários:** entidades criadas, controller não implementado ⚠️  
-- **Quartos:** entidades criadas, controller não implementado ⚠️  
-- **Reservas:** entidades criadas, controller não implementado ⚠️  
 - **Pagamentos:** entidades criadas, controller não implementado ⚠️  
 
 > O projeto está parcialmente funcional e em **fase de desenvolvimento inicial**.
